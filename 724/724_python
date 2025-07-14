@@ -1,0 +1,24 @@
+def isValid(s: str) -> bool:
+    stack = []
+    # Mapping of closing brackets to their corresponding opening brackets
+    bracket_map = {')': '(', '}': '{', ']': '['}
+
+    for char in s:
+        if char in bracket_map.values():
+            # If it's an opening bracket, push to stack
+            stack.append(char)
+        elif char in bracket_map:
+            # If it's a closing bracket, check stack top
+            if not stack or stack[-1] != bracket_map[char]:
+                return False
+            stack.pop()
+        else:
+            # If any other character (not bracket), return False or ignore
+            return False
+
+    # If stack is empty, all brackets matched correctly
+    return len(stack) == 0
+
+# Example usage:
+s = "()"
+print(isValid(s))  # Output: True
